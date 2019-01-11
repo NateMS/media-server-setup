@@ -1,18 +1,6 @@
 # Media Server Setup
 
 Description of the setup I use for my media server.
-I have a Drobo attached directly, so I am using that as storage for all of my media.
-
-**OS**
-Windows Server 2019
-
-**Applications**
-Install the following applications:
-
-- [Git](https://git-scm.com/download/win)
-- [Docker](https://www.docker.com/products/docker-desktop)
-- [Docker-Compose](https://docs.docker.com/docker-for-windows/install/)
-- [Drobo Dashboard](https://www.drobo.com/docs/start-5d/)
 
 ## Setting up Docker
 
