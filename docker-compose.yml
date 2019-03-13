@@ -70,46 +70,6 @@ services:
   volumes:
    - /var/run/docker.sock:/var/run/docker.sock
    - /volume1/docker/config/portainer:/data
- transmission:
-  image: haugene/transmission-openvpn
-  container_name: transmission-openvpn
-  cap_add:
-   - NET_ADMIN
-  devices:
-   - /dev/net/tun
-  restart: unless-stopped
-  ports:
-   - 9091:9091
-   - 8888:8888
-  dns:
-   - 8.8.8.8
-   - 8.8.4.4
-  volumes:
-   - /volume1/docker/config/transmission-openvpn:/data
-   - /volume1/media/downloads:/downloads
-  environment:
-   - OPENVPN_PROVIDER=NORDVPN
-   - OPENVPN_USERNAME=${VPN_USERNAME}
-   - OPENVPN_PASSWORD=${VPN_PASSWORD}
-   - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
-   - OPENVPN_CONFIG=at9.nordvpn.com.udp
-   - LOCAL_NETWORK=192.168.1.0/24
-   - TRANSMISSION_DOWNLOAD_DIR=/downloads
-   - TRANSMISSION_DOWNLOAD_QUEUE_SIZE=15
-   - TRANSMISSION_MAX_PEERS_GLOBAL=700
-   - TRANSMISSION_MAX_PEERS_PER_TORRENT=80
-   - TRANSMISSION_IDLE_SEEDING_LIMIT=1000
-   - TRANSMISSION_RATIO_LIMIT=1
-   - TRANSMISSION_RATIO_LIMIT_ENABLED=true
-   - TRANSMISSION_SPEED_LIMIT_UP=300
-   - TRANSMISSION_SPEED_LIMIT_UP_ENABLED=true
- proxy:
-  image: haugene/transmission-openvpn-proxy
-  container_name: transmission-openvpn-proxy
-  links:
-   - transmission
-  ports:
-   - 8080:8080
  tautulli:
   image: linuxserver/tautulli
   container_name: tautulli
