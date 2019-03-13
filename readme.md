@@ -18,6 +18,7 @@ I am using the following docker images to run these applications inside a contai
 - *[binhex/arch-rtorrentvpn](https://hub.docker.com/r/binhex/arch-rtorrentvpn)* - Torrent Client with VPN
 - *[portainer/portainer](https://hub.docker.com/r/portainer/portainer)* - GUI for managing Docker
 - *[v2tec/watchtower](https://hub.docker.com/r/v2tec/watchtower)* - Automatically restart containers when base image is refreshed
+- *[linuxserver/heimdall](https://hub.docker.com/r/linuxserver/heimdall)* - neat overview page
 
 The configurations for the docker images are saved in the docker-compose.yml file.
 In the same directory as the docker file, there needs to be a .env file to supply the necessary variables.

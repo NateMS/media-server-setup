@@ -154,5 +154,15 @@ services:
   container_name: watchtower
   volumes:
    - /var/run/docker.sock:/var/run/docker.sock
-   
-
+ heimdall:
+  image: linuxserver/heimdall
+  container_name: heimdall
+  volumes:
+   - /volume1/docker/config/heimdall:/config
+  ports:
+   - 9180:80
+   - 9343:443
+  environment:
+   - PUID=1026
+   - PGID=101
+   - TZ=Europe/Zurich
