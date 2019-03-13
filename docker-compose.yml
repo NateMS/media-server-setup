@@ -149,6 +149,29 @@ services:
    - 9080:9080
    - 9443:9443
    - 8118:8118
+ privoxyvpn:
+  image: binhex/arch-privoxyvpn
+  container_name: privoxyvpn
+  cap_add:
+   - NET_ADMIN
+  volumes:
+   - /etc/localtime:/etc/localtime:ro
+   - /volume1/docker/config/privoxyvpn:/config
+  environment:
+   - VPN_ENABLED=no
+   - STRICT_PORT_FORWARD=yes
+   - ENABLE_PRIVOXY=yes
+   - ENABLE_FLOOD=no
+   - ENABLE_AUTODL_IRSSI=yes
+   - LAN_NETWORK=192.168.1.0/24
+   - NAME_SERVERS=8.8.8.8,8.8.4.4
+   - DEBUG=false
+   - PHP_TZ=UTC
+   - UMASK=000
+   - PUID=1026
+   - PGID=101
+  ports:
+   - 9118:8118
  watchtower:
   image: v2tec/watchtower
   container_name: watchtower
