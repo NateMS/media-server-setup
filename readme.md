@@ -12,6 +12,7 @@ I am using the following docker images to run these applications inside a contai
 - *[linuxserver/lidarr](https://hub.docker.com/r/linuxserver/lidarr)* - Monitoring and tracking Music
 - *[linuxserver/bazarr](https://hub.docker.com/r/linuxserver/bazarr)* - Monitoring and tracking Subtitles
 - *[linuxserver/calibre-web](https://hub.docker.com/r/linuxserver/calibre-web)* - Managing and organizing e-books
+- *[thraxis/lazylibrarian-calibre](https://hub.docker.com/r/linuxserver/thraxis/lazylibrarian-calibre)* - Monitoring and tracking e-books, magazines, comics and audiobooks
 - *[linuxserver/jackett](https://hub.docker.com/r/linuxserver/jackett)* - API Support for various trackers
 - *[linuxserver/ombi](https://hub.docker.com/r/linuxserver/ombi)* - Plex Request and user management system
 - *[binhex/arch-rtorrentvpn](https://hub.docker.com/r/binhex/arch-rtorrentvpn)* - Torrent Client with VPN

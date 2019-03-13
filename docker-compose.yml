@@ -108,6 +108,19 @@ services:
    - PGID=101
    - TZ=Europe/Zurich
   restart: unless-stopped
+ lazylibrarian:
+  image: thraxis/lazylibrarian-calibre
+  container_name: lazylibrarian
+  ports:
+   - 5299:5299
+  volumes:
+   - /volume1/docker/config/lazylibrarian:/config
+   - /volume1/media:/data
+  environment:
+   - PUID=1026
+   - PGID=101
+   - TZ=Europe/Zurich
+  restart: unless-stopped
  rtorrent-vpn:
   image: binhex/arch-rtorrentvpn
   container_name: rtorrent-vpn
