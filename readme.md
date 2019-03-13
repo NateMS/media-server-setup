@@ -18,3 +18,4 @@ I am using the following docker images to run these applications inside a contai
 - *[v2tec/watchtower](https://hub.docker.com/r/v2tec/watchtower)* - Automatically restart containers when base image is refreshed
 
 The configurations for the docker images are saved in the docker-compose.yml file.
+In the same directory as the docker file, there needs to be a .env file to supply the necessary variables.

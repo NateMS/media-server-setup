@@ -89,8 +89,8 @@ services:
    - /volume1/media/downloads:/downloads
   environment:
    - OPENVPN_PROVIDER=NORDVPN
-   - OPENVPN_USERNAME=VPN_USERNAME
-   - OPENVPN_PASSWORD=VPN_PASSWORD
+   - OPENVPN_USERNAME=${VPN_USERNAME}
+   - OPENVPN_PASSWORD=${VPN_PASSWORD}
    - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
    - OPENVPN_CONFIG=at9.nordvpn.com.udp
    - LOCAL_NETWORK=192.168.1.0/24
@@ -142,11 +142,11 @@ services:
    - NET_ADMIN
   volumes:
    - /volume1/media/downloads:/data
-   - /volume1/docker/config/rtorrent-nvpn:/config
+   - /volume1/docker/config/rtorrent-vpn:/config
   environment:
    - VPN_ENABLED=yes
-   - VPN_USER=VPN_USERNAME
-   - VPN_PASS=VPN_PASSWORD
+   - VPN_USER=${VPN_USERNAME}
+   - VPN_PASS=${VPN_PASSWORD}
    - VPN_PROV=custom
    - STRICT_PORT_FORWARD=yes
    - ENABLE_PRIVOXY=yes
