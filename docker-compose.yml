@@ -95,6 +95,19 @@ services:
   ports:
    - 8686:8686
   restart: unless-stopped
+ calibre-web:
+  image: linuxserver/calibre-web
+  container_name: calibre-web
+  ports:
+   - 8083:8083
+  volumes:
+   - /volume1/docker/config/calibre-web:/config
+   - /volume1/media/e-books:/books
+  environment:
+   - PUID=1026
+   - PGID=101
+   - TZ=Europe/Zurich
+  restart: unless-stopped
  rtorrent-vpn:
   image: binhex/arch-rtorrentvpn
   container_name: rtorrent-vpn
