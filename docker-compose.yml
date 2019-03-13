@@ -135,6 +135,7 @@ services:
   ports:
    - 9080:9080
    - 9443:9443
+   - 8118:8118
  watchtower:
   image: v2tec/watchtower
   container_name: watchtower
