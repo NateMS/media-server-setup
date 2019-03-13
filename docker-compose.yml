@@ -1,0 +1,171 @@
+version: "3"
+services:
+ radarr:
+  image: linuxserver/radarr
+  container_name: radarr
+  ports:
+   - 7878:7878
+  volumes: 
+   - /volume1/docker/config/radarr:/config
+   - /volume1/media:/data
+  environment:
+   - PUID=1026
+   - PGID=101
+  restart: unless-stopped
+ sonarr:
+  image: linuxserver/sonarr
+  container_name: sonarr
+  ports:
+   - 8989:8989
+  volumes:
+   - /volume1/docker/config/sonarr:/config
+   - /volume1/media:/data
+  environment:
+   - PUID=1026
+   - PGID=101
+  restart: unless-stopped
+ bazarr:
+  image: linuxserver/bazarr
+  container_name: bazarr
+  ports:
+   - 6767:6767
+  volumes:
+   - /volume1/docker/config/bazarr:/config
+   - /volume1/media:/data
+  environment:
+   - PUID=1026
+   - PGID=101
+  restart: unless-stopped
+ jackett:
+  image: linuxserver/jackett
+  container_name: jackett
+  ports:
+   - 9117:9117
+  volumes:
+   - /volume1/docker/config/jackett:/config
+   - /volume1/media/downloads:/downloads
+  environment:
+   - PUID=1026
+   - PGID=101
+  restart: unless-stopped
+ ombi:
+  image: linuxserver/ombi
+  container_name: ombi
+  volumes:
+   - /volume1/docker/config/ombi:/config
+  environment:
+   - PUID=1026
+   - PGID=101
+   - TZ=Europe/Zurich
+  ports:
+   - 3579:3579
+  restart: unless-stopped
+ portainer:
+  image: portainer/portainer
+  container_name: portainer
+  command: -H unix:///var/run/docker.sock
+  restart: always
+  ports:
+   - 9000:9000
+  volumes:
+   - /var/run/docker.sock:/var/run/docker.sock
+   - /volume1/docker/config/portainer:/data
+ transmission:
+  image: haugene/transmission-openvpn
+  container_name: transmission-openvpn
+  cap_add:
+   - NET_ADMIN
+  devices:
+   - /dev/net/tun
+  restart: unless-stopped
+  ports:
+   - 9091:9091
+   - 8888:8888
+  dns:
+   - 8.8.8.8
+   - 8.8.4.4
+  volumes:
+   - /volume1/docker/config/transmission-openvpn:/data
+   - /volume1/media/downloads:/downloads
+  environment:
+   - OPENVPN_PROVIDER=NORDVPN
+   - OPENVPN_USERNAME=VPN_USERNAME
+   - OPENVPN_PASSWORD=VPN_PASSWORD
+   - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60
+   - OPENVPN_CONFIG=at9.nordvpn.com.udp
+   - LOCAL_NETWORK=192.168.1.0/24
+   - TRANSMISSION_DOWNLOAD_DIR=/downloads
+   - TRANSMISSION_DOWNLOAD_QUEUE_SIZE=15
+   - TRANSMISSION_MAX_PEERS_GLOBAL=700
+   - TRANSMISSION_MAX_PEERS_PER_TORRENT=80
+   - TRANSMISSION_IDLE_SEEDING_LIMIT=1000
+   - TRANSMISSION_RATIO_LIMIT=1
+   - TRANSMISSION_RATIO_LIMIT_ENABLED=true
+   - TRANSMISSION_SPEED_LIMIT_UP=300
+   - TRANSMISSION_SPEED_LIMIT_UP_ENABLED=true
+ proxy:
+  image: haugene/transmission-openvpn-proxy
+  container_name: transmission-openvpn-proxy
+  links:
+   - transmission
+  ports:
+   - 8080:8080
+ tautulli:
+  image: linuxserver/tautulli
+  container_name: tautulli
+  volumes:
+   - /volume1/Plex/Library/Application Support/Plex Media Server/Logs:/logs:ro
+   - /volume1/docker/config/tautulli:/config
+  environment:
+   - PUID=1026
+   - PGID=101
+  ports:
+   - 8181:8181
+ lidarr:
+  image: linuxserver/lidarr
+  container_name: lidarr
+  environment:
+   - PUID=1026
+   - PGID=101
+   - TZ=Europe/Zurich
+  volumes:
+   - /volume1/docker/config/lidarr:/config
+   - /volume1/media/music:/music
+   - /volume1/media/downloads:/downloads
+  ports:
+   - 8686:8686
+  restart: unless-stopped
+ rtorrent-vpn:
+  image: binhex/arch-rtorrentvpn
+  container_name: rtorrent-vpn
+  cap_add:
+   - NET_ADMIN
+  volumes:
+   - /volume1/media/downloads:/data
+   - /volume1/docker/config/rtorrent-nvpn:/config
+  environment:
+   - VPN_ENABLED=yes
+   - VPN_USER=VPN_USERNAME
+   - VPN_PASS=VPN_PASSWORD
+   - VPN_PROV=custom
+   - STRICT_PORT_FORWARD=yes
+   - ENABLE_PRIVOXY=yes
+   - ENABLE_FLOOD=no
+   - ENABLE_AUTODL_IRSSI=yes
+   - LAN_NETWORK=192.168.1.0/24
+   - NAME_SERVERS=8.8.8.8,8.8.4.4
+   - DEBUG=false
+   - PHP_TZ=UTC
+   - UMASK=000
+   - PUID=1026
+   - PGID=101
+  ports:
+   - 9080:9080
+   - 9443:9443
+ watchtower:
+  image: v2tec/watchtower
+  container_name: watchtower
+  volumes:
+   - /var/run/docker.sock:/var/run/docker.sock
+   
+
